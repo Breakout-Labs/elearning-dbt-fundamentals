@@ -1,5 +1,5 @@
 with source as (
-    select * from raw.ecomm.orders_de
+    select * from {{ source('ecomm', 'orders') }}
 ),
 
 renamed as (
