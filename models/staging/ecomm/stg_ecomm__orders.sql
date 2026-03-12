@@ -2,6 +2,7 @@ with source as (
     select * from {{ source('ecomm', 'orders') }}
 ),
 
+
 renamed as (
     select  
         id as order_id,
@@ -13,5 +14,6 @@ renamed as (
         _synced_at
     from source
 )
+
 
 select * from renamed
