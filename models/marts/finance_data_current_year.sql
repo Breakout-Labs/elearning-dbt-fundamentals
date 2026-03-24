@@ -7,3 +7,4 @@ from {{ ref('finance_data') }}
 {% else %}
     -- no filter applied
 {% endif %}
+

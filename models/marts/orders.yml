@@ -18,3 +18,4 @@ models:
   - name: delivery_time_from_collection
     description: The time in hours from when the order was picked up to when it was
       delivered.
+      
