@@ -19,6 +19,6 @@ clean-targets:
 models:
   dbt_training:
     +materialized: view
-    +persist_docs:
-    relation: true
-    columns: true
+  
+vars:
+ fiscal_year: 2026

@@ -1,10 +1,11 @@
 version: 2
 
-
 sources:
   - name: ecomm
     database: raw
     tables:
+      - name: orders
+        identifier: orders_us
       - name: deliveries
       - name: customers
         description: Customer data from our ecommerce application
