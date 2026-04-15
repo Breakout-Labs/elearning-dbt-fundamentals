@@ -1,21 +1,26 @@
-with
-
-source as (
-
-    select * from {{ source('ecomm', 'orders') }}
-
+with source as (
+  select
+    *
+  from {{ source('ecomm', 'orders') }}
 ),
 
+
 renamed as (
+  select
+    id as customer_id,
+    'USD' as currency,
+    *
+  from source
+),
 
-    select
-        id as order_id,
-        customer_id,
-        amount,
-        created_at,
 
-    from source
-
+final as (
+  select
+    *
+  from renamed
 )
 
-select * from renamed
+
+select
+  *
+from final
