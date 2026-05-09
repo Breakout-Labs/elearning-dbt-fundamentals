@@ -1,9 +1,12 @@
+{% set country = var('country') %}
+{% set dev_limit = var('dev_limit') %}
+
 with orders as (
     select
         id as order_id,
         customer_id,
         created_at as ordered_at
-    from raw.ecomm.orders_de
+    from raw.ecomm.orders_{{ country }}
 ), 
 
 customers as (
@@ -33,6 +36,9 @@ joined as (
     left join customer_metrics on (
         customers.customer_id = customer_metrics.customer_id
     )
+    {% if dev_limit %}
+    where most_recent_order_at >= dateadd('day', -90, '2021-01-01')
+    {% endif %}
 )
 
 select

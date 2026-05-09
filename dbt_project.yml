@@ -19,3 +19,7 @@ clean-targets:
 models:
   dbt_training:
     +materialized: view
+
+vars:
+  country: 'de'
+  dev_limit: true

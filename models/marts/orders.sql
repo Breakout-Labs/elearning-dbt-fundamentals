@@ -1,0 +1,38 @@
+with orders as (
+   select 
+      *
+   from {{ ref('stg_ecomm__orders') }}
+),
+
+deliveries as (
+   select
+      *
+   from {{ ref('stg_ecomm__deliveries') }}
+),
+
+deliveries_filtered as (
+   select 
+      *
+   from deliveries
+   where delivery_status = 'delivered'
+),
+
+joined as (
+   select
+      orders.order_id,
+      orders.customer_id,
+      orders.ordered_at,
+      orders.order_status,
+      orders.total_amount,
+      {{ duration('orders.ordered_at', 'deliveries_filtered.delivered_at') }} as delivery_time_from_order,
+      {{ duration('deliveries_filtered.picked_up_at', 'deliveries_filtered.delivered_at') }} as delivery_time_from_collection,
+      {{ duration('orders.ordered_at', 'deliveries_filtered.delivered_at', unit='days') }} as delivery_time_from_order_days
+   from orders
+   left join deliveries_filtered on (orders.order_id = deliveries_filtered.order_id)
+   -- Alternatively, you can use the following syntax:
+   -- left join deliveries_filtered using (order_id)
+)
+
+select
+   *
+from joined
