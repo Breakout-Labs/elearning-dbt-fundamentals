@@ -10,8 +10,3 @@ sources:
         columns:
           - name: id
             description: '{{ doc("customer_id") }}'
-      
-  - name: sheets
-    database: raw
-    tables:
-      - name: customer_survey_responses
