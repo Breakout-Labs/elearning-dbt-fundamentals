@@ -12,6 +12,7 @@ customers as (
     from {{ ref('stg_ecomm__customers') }}
 ),
 
+    
 customer_metrics as (
     select
         customer_id,
